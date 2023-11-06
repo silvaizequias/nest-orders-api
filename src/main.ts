@@ -14,8 +14,8 @@ async function bootstrap() {
     }),
   )
   const options = new DocumentBuilder()
-    .setTitle('Field Service Management API')
-    .setDescription('Field Service Management API')
+    .setTitle('Service Management API')
+    .setDescription('Service Management API')
     .setVersion('1.0')
     .build()
 
