@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model Attachment {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at") @db.Date
+  softDeleted Boolean?  @default(false) @map("soft_deleted")
+
+  orderId String @map("order_id")
+  order   Order  @relation(fields: [orderId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  code String  @unique
+  note String? @db.Text
+  file String?
+
+  @@map("attachments")
+}
+
+model Item {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at") @db.Date
+  softDeleted Boolean?  @default(false) @map("soft_deleted")
+
+  orderId String @map("order_id")
+  order   Order  @relation(fields: [orderId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  code   String  @unique
+  note   String? @db.Text
+  amount Int?
+  file   String?
+
+  @@map("items")
+}
+
+model Order {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at") @db.Date
+  softDeleted Boolean?  @default(false) @map("soft_deleted")
+
+  code        String  @unique
+  observation String? @db.Text
+
+  organization String
+  customer     String
+  member       String?
+
+  originZipCode    String? @map("origin_zip_code")
+  originComplement String? @map("origin_complement")
+  originLatitude   Float?  @map("origin_latitude") @db.DoublePrecision
+  originLongitude  Float?  @map("origin_longitude") @db.DoublePrecision
+
+  destinationZipCode    String? @map("destination_zip_code")
+  destinationComplement String? @map("destination_complement")
+  destinationLatitude   Float?  @map("destination_latitude") @db.DoublePrecision
+  destinationLongitude  Float?  @map("destination_longitude") @db.DoublePrecision
+
+  deadline DateTime? @db.Date
+
+  started   Boolean?  @default(false)
+  startDate DateTime? @db.Date
+  startNote String?   @map("start_note") @db.Text
+
+  completed      Boolean?  @default(false)
+  completionDate DateTime? @db.Date
+  completionNote String?   @map("completion_note") @db.Text
+
+  canceled         Boolean?  @default(false)
+  cancellationDate DateTime? @db.Date
+  cancellationNote String?   @map("cancellation_note") @db.Text
+
+  attachments Attachment[]
+  items       Item[]
+
+  @@map("orders")
+}
