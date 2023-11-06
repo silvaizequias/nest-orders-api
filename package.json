@@ -1,5 +1,5 @@
 {
-  "name": "field-service-management",
+  "name": "service-management-api",
   "version": "1.0.0",
   "description": "API responsible for connecting the server client to server service management",
   "author": "Izequias Narcizo dos Santos da Silva",
