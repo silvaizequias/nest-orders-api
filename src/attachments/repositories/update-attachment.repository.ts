@@ -14,10 +14,14 @@ export const updateAttachmentRepository = async (
     delete updateAttachmentDto.orderCode
 
     if (!orderCode) {
-      return await prisma.attachment.update({
-        where: { id: id },
-        data: updateAttachmentDto,
-      })
+      return await prisma.attachment
+        .update({
+          where: { id: id },
+          data: updateAttachmentDto,
+        })
+        .then(async (res) => {
+          return `o anexo ${res?.code} foi atualizado`
+        })
     }
 
     const order = await prisma.order.findFirst({
@@ -33,10 +37,14 @@ export const updateAttachmentRepository = async (
         },
       },
     }
-    return await prisma.attachment.update({
-      where: { id: id, softDeleted: false },
-      data,
-    })
+    return await prisma.attachment
+      .update({
+        where: { id: id, softDeleted: false },
+        data,
+      })
+      .then(async (res) => {
+        return `o anexo ${res?.code} da ordem de serviço ${orderCode} foi atualizado`
+      })
   } catch (error) {
     await prisma.$disconnect()
     throw new HttpException(error, error.status)

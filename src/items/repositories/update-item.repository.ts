@@ -13,10 +13,14 @@ export const updateItemRepository = async (
     delete updateItemDto.orderCode
 
     if (!orderCode) {
-      return await prisma.item.update({
-        where: { id: id, softDeleted: false },
-        data: updateItemDto,
-      })
+      return await prisma.item
+        .update({
+          where: { id: id, softDeleted: false },
+          data: updateItemDto,
+        })
+        .then(async (res) => {
+          return `o item ${res?.code} foi atualizado`
+        })
     }
 
     const order = await prisma.order.findFirst({
@@ -32,10 +36,14 @@ export const updateItemRepository = async (
         },
       },
     }
-    return await prisma.item.update({
-      where: { id: id, softDeleted: false },
-      data,
-    })
+    return await prisma.item
+      .update({
+        where: { id: id, softDeleted: false },
+        data,
+      })
+      .then(async (res) => {
+        return `o item ${res?.code} da ordem de serviço ${orderCode} foi atualizado`
+      })
   } catch (error) {
     await prisma.$disconnect()
     throw new HttpException(error, error.status)

@@ -13,10 +13,14 @@ export const updateOrderRepository = async (
     const data: Prisma.OrderUpdateInput = {
       ...updateOrderDto,
     }
-    return await prisma.order.update({
-      where: { id: id, softDeleted: false },
-      data,
-    })
+    return await prisma.order
+      .update({
+        where: { id: id, softDeleted: false },
+        data,
+      })
+      .then(async (res) => {
+        return `a ordem de serviço ${res?.code} foi atualizada`
+      })
   } catch (error) {
     await prisma.$disconnect()
     throw new HttpException(error, error.status)
