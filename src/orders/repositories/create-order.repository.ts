@@ -14,7 +14,9 @@ export const createOrderRepository = async (createOrderDto: CreateOrderDto) => {
       ...createOrderDto,
       code: code ? code : randomCode,
     }
-    return await prisma.order.create({ data })
+    return await prisma.order.create({ data }).then(async (res) => {
+      return `a ordem de serviço ${res?.code} foi criada`
+    })
   } catch (error) {
     await prisma.$disconnect()
     throw new HttpException(error, error.status)
