@@ -13,6 +13,12 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   )
+
+  app.enableCors({
+    origin: ['http://localhost:3000', 'https://dedicado.digital'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  })
+
   const options = new DocumentBuilder()
     .setTitle('Service Management API')
     .setDescription('Service Management API')
