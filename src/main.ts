@@ -23,13 +23,9 @@ async function bootstrap() {
     .setTitle('Service Management API')
     .setDescription('Service Management API')
     .setVersion('1.0')
-    .addBearerAuth({
-      type: 'http',
-      in: 'header',
-      description: 'authorization',
-    })
     .addApiKey({
       type: 'apiKey',
+      name: 'authorization',
       in: 'header',
       description: 'authorization',
     })
