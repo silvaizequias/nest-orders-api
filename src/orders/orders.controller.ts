@@ -13,21 +13,15 @@ import {
 import { OrdersService } from './orders.service'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { UpdateOrderDto } from './dto/update-order.dto'
-import {
-  ApiBearerAuth,
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiTags,
-} from '@nestjs/swagger'
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
+import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
 
 @ApiTags('orders')
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -36,8 +30,7 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -46,8 +39,7 @@ export class OrdersController {
     return this.ordersService.findAll()
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -56,8 +48,7 @@ export class OrdersController {
     return this.ordersService.findOne(id)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -66,8 +57,7 @@ export class OrdersController {
     return this.ordersService.update(id, updateOrderDto)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)

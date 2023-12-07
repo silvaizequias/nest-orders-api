@@ -13,21 +13,15 @@ import {
 import { AttachmentsService } from './attachments.service'
 import { CreateAttachmentDto } from './dto/create-attachment.dto'
 import { UpdateAttachmentDto } from './dto/update-attachment.dto'
-import {
-  ApiBearerAuth,
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiTags,
-} from '@nestjs/swagger'
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
+import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
 
 @ApiTags('attachments')
 @Controller('attachments')
 export class AttachmentsController {
   constructor(private readonly attachmentsService: AttachmentsService) {}
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -36,8 +30,7 @@ export class AttachmentsController {
     return this.attachmentsService.create(createAttachmentDto)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -46,8 +39,7 @@ export class AttachmentsController {
     return this.attachmentsService.findAll()
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -56,8 +48,7 @@ export class AttachmentsController {
     return this.attachmentsService.findOne(id)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -69,8 +60,7 @@ export class AttachmentsController {
     return this.attachmentsService.update(id, updateAttachmentDto)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
