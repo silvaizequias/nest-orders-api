@@ -23,6 +23,16 @@ async function bootstrap() {
     .setTitle('Service Management API')
     .setDescription('Service Management API')
     .setVersion('1.0')
+    .addBearerAuth({
+      type: 'http',
+      in: 'header',
+      description: 'authorization',
+    })
+    .addApiKey({
+      type: 'apiKey',
+      in: 'header',
+      description: 'authorization',
+    })
     .build()
 
   const document = SwaggerModule.createDocument(app, options)
