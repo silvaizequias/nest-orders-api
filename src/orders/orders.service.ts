@@ -5,6 +5,7 @@ import { createOrderRepository } from './repositories/create-order.repository'
 import { readOrderRepository } from './repositories/read-order.repository'
 import { updateOrderRepository } from './repositories/update-order.repository'
 import { deleteOrderRepository } from './repositories/delete-order.repository'
+import { readOrderByCodeRepository } from './repositories/read-order-by-code.repository'
 
 @Injectable()
 export class OrdersService {
@@ -14,6 +15,10 @@ export class OrdersService {
 
   findAll() {
     return readOrderRepository()
+  }
+
+  findByCode(code: string) {
+    return readOrderByCodeRepository(code)
   }
 
   findOne(id: string) {

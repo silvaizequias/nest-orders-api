@@ -14,12 +14,14 @@ import { AttachmentsService } from './attachments.service'
 import { CreateAttachmentDto } from './dto/create-attachment.dto'
 import { UpdateAttachmentDto } from './dto/update-attachment.dto'
 import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { AuthGuard } from '@nestjs/passport'
 
 @ApiTags('attachments')
 @Controller('attachments')
 export class AttachmentsController {
   constructor(private readonly attachmentsService: AttachmentsService) {}
 
+  @UseGuards(AuthGuard('authorization'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -28,6 +30,7 @@ export class AttachmentsController {
     return this.attachmentsService.create(createAttachmentDto)
   }
 
+  @UseGuards(AuthGuard('authorization'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -36,6 +39,7 @@ export class AttachmentsController {
     return this.attachmentsService.findAll()
   }
 
+  @UseGuards(AuthGuard('authorization'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -44,6 +48,7 @@ export class AttachmentsController {
     return this.attachmentsService.findOne(id)
   }
 
+  @UseGuards(AuthGuard('authorization'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -55,6 +60,7 @@ export class AttachmentsController {
     return this.attachmentsService.update(id, updateAttachmentDto)
   }
 
+  @UseGuards(AuthGuard('authorization'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
