@@ -14,14 +14,12 @@ import { ItemsService } from './items.service'
 import { CreateItemDto } from './dto/create-item.dto'
 import { UpdateItemDto } from './dto/update-item.dto'
 import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
 
 @ApiTags('items')
 @Controller('items')
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
-  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -30,7 +28,6 @@ export class ItemsController {
     return this.itemsService.create(createItemDto)
   }
 
-  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -39,7 +36,6 @@ export class ItemsController {
     return this.itemsService.findAll()
   }
 
-  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -48,7 +44,6 @@ export class ItemsController {
     return this.itemsService.findOne(id)
   }
 
-  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -57,7 +52,6 @@ export class ItemsController {
     return this.itemsService.update(id, updateItemDto)
   }
 
-  @UseGuards(LocalAuthGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)

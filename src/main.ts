@@ -23,12 +23,6 @@ async function bootstrap() {
     .setTitle('Service Management API')
     .setDescription('Service Management API')
     .setVersion('1.0')
-    .addApiKey({
-      type: 'apiKey',
-      name: 'authorization',
-      in: 'header',
-      description: 'authorization',
-    })
     .build()
 
   const document = SwaggerModule.createDocument(app, options)
