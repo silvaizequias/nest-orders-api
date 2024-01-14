@@ -9,6 +9,10 @@ import {
 } from 'class-validator'
 
 export class CreateOrderDto {
+  @ApiProperty()
+  @IsString()
+  organization: string
+
   @ApiPropertyOptional()
   @IsString()
   @IsOptional()
@@ -18,10 +22,6 @@ export class CreateOrderDto {
   @IsString()
   @IsOptional()
   observation: string
-
-  @ApiProperty()
-  @IsString()
-  organization: string
 
   @ApiProperty()
   @IsString()

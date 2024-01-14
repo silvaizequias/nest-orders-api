@@ -4,7 +4,8 @@ import { AttachmentsModule } from './attachments/attachments.module'
 import { ItemsModule } from './items/items.module'
 import { OrdersModule } from './orders/orders.module'
 import { PrismaModule } from './prisma/prisma.module'
-import { AuthModule } from './auth/auth.module'
+import { DomainsModule } from './domains/domains.module'
+import { AuthorizationModule } from './authorization/authorization.module'
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { AuthModule } from './auth/auth.module'
     ItemsModule,
     OrdersModule,
     PrismaModule,
-    AuthModule,
+    AuthorizationModule,
+    DomainsModule,
   ],
   providers: [],
 })

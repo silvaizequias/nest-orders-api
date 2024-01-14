@@ -7,6 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Domain {
+  id String @id @default(cuid())
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at") @db.Date
+
+  softDeleted Boolean? @default(false) @map("soft_deleted")
+  active      Boolean? @default(true)
+  subscriber  Boolean? @default(false)
+  suspended   Boolean? @default(false)
+
+  organization  String
+  authorization String @unique
+
+  orders Order[]
+
+  @@map("domains")
+}
+
 model Attachment {
   id          String    @id @default(cuid())
   createdAt   DateTime  @default(now()) @map("created_at")
@@ -48,6 +68,9 @@ model Order {
   updatedAt   DateTime  @updatedAt @map("updated_at")
   deletedAt   DateTime? @map("deleted_at") @db.Date
   softDeleted Boolean?  @default(false) @map("soft_deleted")
+
+  domainId String @map("domain_id")
+  domain   Domain @relation(fields: [domainId], references: [id], onUpdate: Cascade)
 
   code        String  @unique
   observation String? @db.Text

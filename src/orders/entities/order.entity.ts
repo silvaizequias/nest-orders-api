@@ -6,6 +6,7 @@ export class OrderEntity implements Order {
   updatedAt: Date
   deletedAt: Date
   softDeleted: boolean
+  domainId: string
   code: string
   observation: string
   organization: string
