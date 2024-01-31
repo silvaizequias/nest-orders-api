@@ -6,6 +6,7 @@ import { readOrderRepository } from './repositories/read-order.repository'
 import { updateOrderRepository } from './repositories/update-order.repository'
 import { deleteOrderRepository } from './repositories/delete-order.repository'
 import { readOrderByCodeRepository } from './repositories/read-order-by-code.repository'
+import { readOrderByOrganizationRepository } from './repositories/read-order-by-organization.repository'
 
 @Injectable()
 export class OrdersService {
@@ -19,6 +20,10 @@ export class OrdersService {
 
   findByCode(code: string) {
     return readOrderByCodeRepository(code)
+  }
+
+  findByOrganization(organization: string) {
+    return readOrderByOrganizationRepository(organization)
   }
 
   findOne(id: string) {

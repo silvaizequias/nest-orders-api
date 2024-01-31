@@ -11,12 +11,6 @@ export const readOrderByCodeRepository = async (code: string) => {
         include: {
           items: true,
           attachments: true,
-          domain: {
-            select: {
-              id: true,
-              organization: true,
-            },
-          },
         },
       })
       .then(async (res) => {

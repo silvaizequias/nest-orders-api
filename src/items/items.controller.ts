@@ -21,7 +21,7 @@ import { AuthGuard } from '@nestjs/passport'
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -30,7 +30,7 @@ export class ItemsController {
     return this.itemsService.create(createItemDto)
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -39,7 +39,7 @@ export class ItemsController {
     return this.itemsService.findAll()
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -48,7 +48,7 @@ export class ItemsController {
     return this.itemsService.findOne(id)
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -57,7 +57,7 @@ export class ItemsController {
     return this.itemsService.update(id, updateItemDto)
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
