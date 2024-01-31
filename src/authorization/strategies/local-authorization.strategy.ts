@@ -6,16 +6,16 @@ import { HeaderAPIKeyStrategy } from 'passport-headerapikey'
 @Injectable()
 export class LocalAuthorizationStrategy extends PassportStrategy(
   HeaderAPIKeyStrategy,
-  'authorization',
+  'authorizationKey',
 ) {
   constructor(private authorizationService: AuthorizationService) {
     super(
-      { header: 'authorization', prefix: '' },
+      { header: 'authorizationKey', prefix: '' },
       true,
-      async (authorization: string, done: any) => {
+      async (authorizationKey: string, done: any) => {
         const authorized =
-          await this.authorizationService.validation(authorization)
-        if (!authorized) return done(null, false)
+          await this.authorizationService.validation(authorizationKey)
+        if (authorized && !authorized?.active) return done(null, false)
 
         return done(null, true)
       },

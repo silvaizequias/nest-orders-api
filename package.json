@@ -1,7 +1,7 @@
 {
-  "name": "service-management-api",
+  "name": "order-management-api",
   "version": "1.0.0",
-  "description": "API responsible for connecting the server client to server service management",
+  "description": "API responsible for connecting the server client to server order management",
   "author": "Izequias Narcizo dos Santos da Silva",
   "private": true,
   "license": "UNLICENSED",

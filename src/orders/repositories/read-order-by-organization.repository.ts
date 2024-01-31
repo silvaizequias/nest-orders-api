@@ -1,19 +1,23 @@
 import { HttpException, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 
-export const deleteDomainRepository = async (id: string) => {
+export const readOrderByOrganizationRepository = async (
+  organization: string,
+) => {
   const prisma = new PrismaService()
+
   try {
-    return await prisma.domain
-      .update({
-        where: { id: id, softDeleted: false },
-        data: {
-          softDeleted: true,
+    return await prisma.order
+      .findMany({
+        where: { organization: organization, softDeleted: false },
+        include: {
+          items: true,
+          attachments: true,
         },
       })
       .then(async (res) => {
-        if (!res) throw new NotFoundException('domínio não encontrado')
-        return `o domínio da organização ${res?.organization} foi removido`
+        if (!res) throw new NotFoundException('ordem não encontrada')
+        return res
       })
   } catch (error) {
     await prisma.$disconnect()

@@ -21,7 +21,7 @@ import { AuthGuard } from '@nestjs/passport'
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -30,7 +30,7 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto)
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -39,7 +39,7 @@ export class OrdersController {
     return this.ordersService.findAll()
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -48,7 +48,16 @@ export class OrdersController {
     return this.ordersService.findByCode(code)
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('organization/:organization')
+  findByOrganization(@Param('organization') organization: string) {
+    return this.ordersService.findByOrganization(organization)
+  }
+
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -57,7 +66,7 @@ export class OrdersController {
     return this.ordersService.findOne(id)
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -66,7 +75,7 @@ export class OrdersController {
     return this.ordersService.update(id, updateOrderDto)
   }
 
-  @UseGuards(AuthGuard('authorization'))
+  @UseGuards(AuthGuard('authorizationKey'))
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)

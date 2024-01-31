@@ -5,25 +5,28 @@ import { Prisma } from '@prisma/client'
 
 export const createOrderRepository = async (createOrderDto: CreateOrderDto) => {
   const prisma = new PrismaService()
+  const PLATFORM_URL = process.env.PLATFORM_URL!
 
   try {
     const randomCode = Math.random().toString(32).substr(2, 14).toUpperCase()
     const { code, organization } = createOrderDto
-    delete createOrderDto.organization
 
-    const domain = await prisma.domain.findFirst({
-      where: { organization: organization },
-    })
-    if (!domain) throw new NotFoundException('dominio não encontrado')
+    const document = await fetch(
+      `${PLATFORM_URL}/organizations/document/${organization}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+    const organizationDocument = document && (await document.json())
+    if (!organizationDocument?.document)
+      throw new NotFoundException(`a organização não existe na plataforma`)
 
     const data: Prisma.OrderCreateInput = {
       ...createOrderDto,
       code: code ? code : randomCode,
-      domain: {
-        connect: {
-          id: domain.id,
-        },
-      },
     }
     return await prisma.order.create({ data }).then(async (res) => {
       return `a ordem de serviço ${res?.code} foi criada`

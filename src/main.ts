@@ -23,11 +23,16 @@ async function bootstrap() {
     .setTitle('Service Management API')
     .setDescription('Service Management API')
     .setVersion('1.0')
+    .addApiKey({
+      type: 'apiKey',
+      in: 'header',
+      description: 'authorizationKey',
+    })
     .build()
 
   const document = SwaggerModule.createDocument(app, options)
   SwaggerModule.setup('', app, document)
 
-  await app.listen(PORT || 3020)
+  await app.listen(PORT || 3000)
 }
 bootstrap()

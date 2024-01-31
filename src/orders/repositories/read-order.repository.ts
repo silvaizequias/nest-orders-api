@@ -12,12 +12,6 @@ export const readOrderRepository = async (id?: string) => {
           include: {
             items: true,
             attachments: true,
-            domain: {
-              select: {
-                id: true,
-                organization: true,
-              },
-            },
           },
         })
         .then(async (res) => {
@@ -31,12 +25,6 @@ export const readOrderRepository = async (id?: string) => {
       include: {
         items: true,
         attachments: true,
-        domain: {
-          select: {
-            id: true,
-            organization: true,
-          },
-        },
       },
     })
   } catch (error) {
