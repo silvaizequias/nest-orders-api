@@ -13,7 +13,7 @@ export const deleteAttachmentRepository = async (id: string) => {
       })
       .then(async (res) => {
         if (!res) throw new NotFoundException('anexo não encontrado')
-        return `anexo ${res?.code} removido`
+        return JSON.stringify(`anexo ${res?.code} removido`)
       })
   } catch (error) {
     await prisma.$disconnect()

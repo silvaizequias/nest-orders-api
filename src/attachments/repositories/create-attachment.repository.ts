@@ -29,7 +29,9 @@ export const createAttachmentRespository = async (
     }
 
     return await prisma.attachment.create({ data }).then(async (res) => {
-      return `a ordem de serviço ${orderCode} recebeu um anexo ${res?.code}`
+      return JSON.stringify(
+        `a ordem de serviço ${orderCode} recebeu um anexo ${res?.code}`,
+      )
     })
   } catch (error) {
     await prisma.$disconnect()
