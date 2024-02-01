@@ -20,7 +20,7 @@ export const updateAttachmentRepository = async (
           data: updateAttachmentDto,
         })
         .then(async (res) => {
-          return `o anexo ${res?.code} foi atualizado`
+          return JSON.stringify(`o anexo ${res?.code} foi atualizado`)
         })
     }
 
@@ -43,7 +43,9 @@ export const updateAttachmentRepository = async (
         data,
       })
       .then(async (res) => {
-        return `o anexo ${res?.code} da ordem de serviço ${orderCode} foi atualizado`
+        return JSON.stringify(
+          `o anexo ${res?.code} da ordem de serviço ${orderCode} foi atualizado`,
+        )
       })
   } catch (error) {
     await prisma.$disconnect()

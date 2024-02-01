@@ -19,7 +19,7 @@ export const updateOrderRepository = async (
         data,
       })
       .then(async (res) => {
-        return `a ordem de serviço ${res?.code} foi atualizada`
+        return JSON.stringify(`a ordem de serviço ${res?.code} foi atualizada`)
       })
   } catch (error) {
     await prisma.$disconnect()

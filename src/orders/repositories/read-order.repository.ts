@@ -22,6 +22,7 @@ export const readOrderRepository = async (id?: string) => {
 
     return await prisma.order.findMany({
       where: { softDeleted: false },
+      orderBy: { createdAt: 'desc' },
       include: {
         items: true,
         attachments: true,
