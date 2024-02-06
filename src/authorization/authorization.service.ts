@@ -33,7 +33,7 @@ export class AuthorizationService {
         const logSpend = {
           createdAt: new Date(),
           document: response?.organization?.document,
-          mehtod: method,
+          method: method,
           url: url,
         }
         await mongoClient.connect()
