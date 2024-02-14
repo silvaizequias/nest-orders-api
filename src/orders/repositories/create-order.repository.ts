@@ -12,7 +12,7 @@ export const createOrderRepository = async (createOrderDto: CreateOrderDto) => {
     const { code, organization } = createOrderDto
 
     const document = await fetch(
-      `${PLATFORM_URL}/organizations/document/${organization}`,
+      `${PLATFORM_URL}/organizations/verification/${organization}`,
       {
         method: 'GET',
         headers: {
