@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
+import { Type } from 'class-transformer'
 import {
   IsBoolean,
   IsDate,
@@ -75,9 +76,10 @@ export class CreateOrderDto {
   destinationLongitude: number
 
   @ApiPropertyOptional()
-  @IsDate()
   @IsOptional()
-  deadline: Date
+  @IsDate()
+  @Type(() => Date)
+  deletedAt: Date
 
   @ApiPropertyOptional()
   @IsBoolean()
@@ -85,8 +87,9 @@ export class CreateOrderDto {
   started: boolean
 
   @ApiPropertyOptional()
-  @IsDate()
   @IsOptional()
+  @IsDate()
+  @Type(() => Date)
   startDate: Date
 
   @ApiPropertyOptional()
@@ -100,8 +103,9 @@ export class CreateOrderDto {
   completed: boolean
 
   @ApiPropertyOptional()
-  @IsDate()
   @IsOptional()
+  @IsDate()
+  @Type(() => Date)
   completionDate: Date
 
   @ApiPropertyOptional()
@@ -115,8 +119,9 @@ export class CreateOrderDto {
   canceled: boolean
 
   @ApiPropertyOptional()
-  @IsDate()
   @IsOptional()
+  @IsDate()
+  @Type(() => Date)
   cancellationDate: Date
 
   @ApiPropertyOptional()
