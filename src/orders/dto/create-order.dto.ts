@@ -79,7 +79,7 @@ export class CreateOrderDto {
   @IsOptional()
   @IsDate()
   @Type(() => Date)
-  deletedAt: Date
+  deadline: Date
 
   @ApiPropertyOptional()
   @IsBoolean()
