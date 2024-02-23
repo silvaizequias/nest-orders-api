@@ -1,5 +1,5 @@
 {
-  "name": "order-management-api",
+  "name": "dedicated-orders",
   "version": "1.0.0",
   "description": "API responsible for connecting the server client to server order management",
   "author": "Izequias Narcizo dos Santos da Silva",
