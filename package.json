@@ -1,7 +1,7 @@
 {
   "name": "dedicated-orders",
   "version": "1.0.0",
-  "description": "API responsible for connecting the server client to server order management",
+  "description": "",
   "author": "Izequias Narcizo dos Santos da Silva",
   "private": true,
   "license": "UNLICENSED",
