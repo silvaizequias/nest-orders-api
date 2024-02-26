@@ -13,7 +13,7 @@ export const deleteOrderRepository = async (id: string) => {
         },
       })
       .then(async (res) => {
-        if (!res) throw new NotFoundException('ordem não encontrada')
+        if (!res) throw new NotFoundException('pedido não encontrado')
         return res
       })
   } catch (error) {

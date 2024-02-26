@@ -5,14 +5,14 @@ import { Prisma } from '@prisma/client'
 
 export const createOrderRepository = async (createOrderDto: CreateOrderDto) => {
   const prisma = new PrismaService()
-  const PLATFORM_URL = process.env.PLATFORM_URL!
+  const MANAGEMENT_API_URL = process.env.MANAGEMENT_API_URL!
 
   try {
     const randomCode = Math.random().toString(32).substr(2, 14).toUpperCase()
     const { code, organization } = createOrderDto
 
     const document = await fetch(
-      `${PLATFORM_URL}/organizations/verification/${organization}`,
+      `${MANAGEMENT_API_URL}/organizations/verification/${organization}`,
       {
         method: 'GET',
         headers: {
@@ -29,7 +29,7 @@ export const createOrderRepository = async (createOrderDto: CreateOrderDto) => {
       code: code ? code : randomCode,
     }
     return await prisma.order.create({ data }).then(async (res) => {
-      return JSON.stringify(`a ordem de serviço ${res?.code} foi criada`)
+      return JSON.stringify(`o pedido ${res?.code} foi criado`)
     })
   } catch (error) {
     await prisma.$disconnect()

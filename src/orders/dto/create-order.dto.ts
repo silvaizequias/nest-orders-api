@@ -5,6 +5,7 @@ import {
   IsDate,
   IsNumber,
   IsOptional,
+  IsPositive,
   IsString,
   Length,
 } from 'class-validator'
@@ -18,6 +19,22 @@ export class CreateOrderDto {
   @IsString()
   @IsOptional()
   code: string
+
+  @ApiPropertyOptional()
+  @IsString()
+  @IsOptional()
+  requirement: string
+
+  @ApiPropertyOptional()
+  @IsString()
+  @IsOptional()
+  subject: string
+
+  @ApiPropertyOptional({ default: 0 })
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @IsPositive()
+  @IsOptional()
+  price: number
 
   @ApiPropertyOptional()
   @IsString()
