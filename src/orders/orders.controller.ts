@@ -52,6 +52,24 @@ export class OrdersController {
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
+  @Get('customer/:customer')
+  findByCustomer(@Param('customer') customer: string) {
+    return this.ordersService.findByCustomer(customer)
+  }
+
+  @UseGuards(AuthGuard('authorizationKey'))
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('member/:member')
+  findByMember(@Param('member') member: string) {
+    return this.ordersService.findByMember(member)
+  }
+
+  @UseGuards(AuthGuard('authorizationKey'))
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('organization/:organization')
   findByOrganization(@Param('organization') organization: string) {
     return this.ordersService.findByOrganization(organization)

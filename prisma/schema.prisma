@@ -42,6 +42,23 @@ model Item {
   @@map("items")
 }
 
+model Note {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at") @db.Date
+  softDeleted Boolean?  @default(false) @map("soft_deleted")
+
+  orderId String @map("order_id")
+  order   Order  @relation(fields: [orderId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  content  String  @db.Text
+  member   String?
+  customer String?
+
+  @@map("notes")
+}
+
 model Order {
   id          String    @id @default(cuid())
   createdAt   DateTime  @default(now()) @map("created_at")
@@ -49,8 +66,11 @@ model Order {
   deletedAt   DateTime? @map("deleted_at") @db.Date
   softDeleted Boolean?  @default(false) @map("soft_deleted")
 
-  code        String  @unique
-  observation String? @db.Text
+  code        String   @unique
+  requirement String?
+  subject     String?
+  price       Decimal? @default(0) @db.Decimal(5, 2)
+  observation String?  @db.Text
 
   organization String
   customer     String
@@ -66,22 +86,23 @@ model Order {
   destinationLatitude   Float?  @map("destination_latitude") @db.DoublePrecision
   destinationLongitude  Float?  @map("destination_longitude") @db.DoublePrecision
 
-  deadline DateTime? @db.Date
+  deadline DateTime? @db.Timestamp
 
   started   Boolean?  @default(false)
   startDate DateTime? @db.Date
   startNote String?   @map("start_note") @db.Text
 
   completed      Boolean?  @default(false)
-  completionDate DateTime? @db.Date
+  completionDate DateTime? @db.Timestamp
   completionNote String?   @map("completion_note") @db.Text
 
   canceled         Boolean?  @default(false)
-  cancellationDate DateTime? @db.Date
+  cancellationDate DateTime? @db.Timestamp
   cancellationNote String?   @map("cancellation_note") @db.Text
 
   attachments Attachment[]
   items       Item[]
+  notes       Note[]
 
   @@map("orders")
 }

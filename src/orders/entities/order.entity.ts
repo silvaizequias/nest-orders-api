@@ -1,4 +1,5 @@
 import { Order } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 
 export class OrderEntity implements Order {
   id: string
@@ -7,6 +8,9 @@ export class OrderEntity implements Order {
   deletedAt: Date
   softDeleted: boolean
   code: string
+  requirement: string
+  subject: string
+  price: Decimal
   observation: string
   organization: string
   customer: string

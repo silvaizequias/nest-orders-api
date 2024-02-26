@@ -1,32 +1,27 @@
 import { HttpException, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 
-export const readOrderRepository = async (id?: string) => {
+export const readNoteRepository = async (id?: string) => {
   const prisma = new PrismaService()
-
   try {
     if (id) {
-      return await prisma.order
+      return await prisma.note
         .findFirst({
           where: { id: id, softDeleted: false },
           include: {
-            notes: true,
-            items: true,
-            attachments: true,
+            order: true,
           },
         })
         .then(async (res) => {
-          if (!res) throw new NotFoundException('ordem não encontrada')
+          if (!res) return new NotFoundException('nota não encontrada')
           return res
         })
     }
 
-    return await prisma.order.findMany({
+    return await prisma.note.findMany({
       where: { softDeleted: false },
-      orderBy: { createdAt: 'desc' },
       include: {
-        items: true,
-        attachments: true,
+        order: true,
       },
     })
   } catch (error) {
