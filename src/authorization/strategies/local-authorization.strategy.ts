@@ -12,11 +12,9 @@ export class LocalAuthorizationStrategy extends PassportStrategy(
     super(
       { header: 'authorizationKey', prefix: '' },
       true,
-      async (authorizationKey: string, done: any, request: Request) => {
-        const authorized = await this.authorizationService.validation(
-          authorizationKey,
-          request,
-        )
+      async (authorizationKey: string, done: any) => {
+        const authorized =
+          await this.authorizationService.validation(authorizationKey)
         if (authorized && !authorized?.active) return done(null, false)
 
         return done(null, true)

@@ -1,26 +1,15 @@
 import { HttpException, Injectable } from '@nestjs/common'
-import { MongoClient, ServerApiVersion } from 'mongodb'
 
 @Injectable()
 export class AuthorizationService {
   constructor() {}
 
-  async validation(authorizationKey: string, request: Request): Promise<any> {
-    const PLATFORM_URL = process.env.PLATFORM_URL!
-    const DATABASE_URI = process.env.DATABASE_URI!
-
-    const mongoClient = new MongoClient(DATABASE_URI, {
-      serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-      },
-    })
+  async validation(authorizationKey: string): Promise<any> {
+    const MANAGEMENT_API_URL = process.env.MANAGEMENT_API_URL!
 
     try {
-      const { method, url } = request
       const data = await fetch(
-        `${PLATFORM_URL}/organization-keys/authorization-key/${authorizationKey}`,
+        `${MANAGEMENT_API_URL}/organization-keys/authorization-key/${authorizationKey}`,
         {
           method: 'GET',
           headers: {
@@ -29,21 +18,10 @@ export class AuthorizationService {
         },
       )
       const response = data && (await data.json())
-      if (response?.active) {
-        const logSpend = {
-          createdAt: new Date(),
-          document: response?.organization?.document,
-          method: method,
-          url: url,
-        }
-        await mongoClient.connect()
-        await mongoClient.db().collection('api_spends').insertOne(logSpend)
-      }
+
       return response
     } catch (error) {
       throw new HttpException(error, error.status)
-    } finally {
-      await mongoClient.close()
     }
   }
 }

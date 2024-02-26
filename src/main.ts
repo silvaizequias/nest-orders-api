@@ -20,8 +20,8 @@ async function bootstrap() {
   })
 
   const options = new DocumentBuilder()
-    .setTitle('Service Management API')
-    .setDescription('Service Management API')
+    .setTitle('management')
+    .setDescription('management')
     .setVersion('1.0')
     .addApiKey({
       type: 'apiKey',
