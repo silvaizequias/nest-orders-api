@@ -3,7 +3,7 @@ import { UpdateOrderDto } from '../dto/update-order.dto'
 import { HttpException } from '@nestjs/common'
 import { Prisma } from '@prisma/client'
 
-export const updateOrderRepository = async (
+export const updateOrder = async (
   id: string,
   updateOrderDto: UpdateOrderDto,
 ) => {
@@ -19,7 +19,7 @@ export const updateOrderRepository = async (
         data,
       })
       .then(async (res) => {
-        return JSON.stringify(`a ordem de serviço ${res?.code} foi atualizada`)
+        return JSON.stringify(`o pedido ${res?.code} foi atualizada`)
       })
   } catch (error) {
     await prisma.$disconnect()

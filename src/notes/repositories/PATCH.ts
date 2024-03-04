@@ -3,10 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service'
 import { UpdateNoteDto } from '../dto/update-note.dto'
 import { Prisma } from '@prisma/client'
 
-export const updateNoteRepository = async (
-  id: string,
-  updateNoteDto: UpdateNoteDto,
-) => {
+export const updateNote = async (id: string, updateNoteDto: UpdateNoteDto) => {
   const prisma = new PrismaService()
   try {
     const data: Prisma.NoteUpdateInput = {

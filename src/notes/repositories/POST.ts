@@ -3,7 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service'
 import { CreateNoteDto } from '../dto/create-note.dto'
 import { Prisma } from '@prisma/client'
 
-export const createNoteRepository = async (createNoteDto: CreateNoteDto) => {
+export const createNote = async (createNoteDto: CreateNoteDto) => {
   const prisma = new PrismaService()
   try {
     const { orderCode } = createNoteDto
@@ -12,7 +12,7 @@ export const createNoteRepository = async (createNoteDto: CreateNoteDto) => {
     const order = await prisma.order.findFirst({
       where: { code: orderCode, softDeleted: false },
     })
-    if (!order) throw new NotFoundException('o pedido ${orderCode} não existe')
+    if (!order) throw new NotFoundException(`o pedido ${orderCode} não existe`)
 
     const data: Prisma.NoteCreateInput = {
       ...createNoteDto,

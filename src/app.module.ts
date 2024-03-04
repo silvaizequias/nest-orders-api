@@ -5,7 +5,7 @@ import { ItemsModule } from './items/items.module'
 import { OrdersModule } from './orders/orders.module'
 import { PrismaModule } from './prisma/prisma.module'
 import { AuthorizationModule } from './authorization/authorization.module'
-import { NotesModule } from './notes/notes.module';
+import { NotesModule } from './notes/notes.module'
 
 @Module({
   imports: [

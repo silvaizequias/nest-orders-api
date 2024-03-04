@@ -1,22 +1,26 @@
-import { HttpException, NotFoundException } from '@nestjs/common'
-import { CreateItemDto } from './../dto/create-item.dto'
 import { PrismaService } from 'src/prisma/prisma.service'
+import { CreateAttachmentDto } from '../dto/create-attachment.dto'
+import { HttpException, NotFoundException } from '@nestjs/common'
 import { Prisma } from '@prisma/client'
-export const createItemRepository = async (createItemDto: CreateItemDto) => {
+
+export const createAttachment = async (
+  createAttachmentDto: CreateAttachmentDto,
+) => {
   const prisma = new PrismaService()
 
   try {
     const randomCode = Math.random().toString(32).substr(2, 14).toUpperCase()
-    const { orderCode, code } = createItemDto
-    delete createItemDto.orderCode
+    const { orderCode, code } = createAttachmentDto
+    delete createAttachmentDto.orderCode
 
     const order = await prisma.order.findFirst({
       where: { code: orderCode, softDeleted: false },
     })
-    if (!order) throw new NotFoundException('ordem não encontrada')
+    if (!order)
+      throw new NotFoundException(`o pedido ${orderCode} não foi encontrado`)
 
-    const data: Prisma.ItemCreateInput = {
-      ...createItemDto,
+    const data: Prisma.AttachmentCreateInput = {
+      ...createAttachmentDto,
       code: code ? code : randomCode,
       order: {
         connect: {
@@ -24,9 +28,10 @@ export const createItemRepository = async (createItemDto: CreateItemDto) => {
         },
       },
     }
-    return await prisma.item.create({ data }).then(async (res) => {
+
+    return await prisma.attachment.create({ data }).then(async (res) => {
       return JSON.stringify(
-        `o item ${res?.code} da ordem de serviço ${orderCode} foi criado`,
+        `o pedido ${orderCode} recebeu um anexo ${res?.code}`,
       )
     })
   } catch (error) {

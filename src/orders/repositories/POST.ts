@@ -3,16 +3,16 @@ import { CreateOrderDto } from '../dto/create-order.dto'
 import { HttpException, NotFoundException } from '@nestjs/common'
 import { Prisma } from '@prisma/client'
 
-export const createOrderRepository = async (createOrderDto: CreateOrderDto) => {
+export const createOrder = async (createOrderDto: CreateOrderDto) => {
   const prisma = new PrismaService()
-  const MANAGEMENT_API_URL = process.env.MANAGEMENT_API_URL!
+  const ORGANIZATION_API_URL = process.env.ORGANIZATION_API_URL!
 
   try {
     const randomCode = Math.random().toString(32).substr(2, 14).toUpperCase()
     const { code, organization } = createOrderDto
 
     const document = await fetch(
-      `${MANAGEMENT_API_URL}/organizations/verification/${organization}`,
+      `${ORGANIZATION_API_URL}/organizations/verify/${organization}`,
       {
         method: 'GET',
         headers: {

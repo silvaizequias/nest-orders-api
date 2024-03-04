@@ -1,18 +1,15 @@
 import { HttpException, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 
-export const readOrderByMemberRepository = async (member: string) => {
+export const removeOrder = async (id: string) => {
   const prisma = new PrismaService()
 
   try {
-    return await prisma.order
-      .findMany({
-        where: { member: member, softDeleted: false },
-        orderBy: { createdAt: 'desc' },
-        include: {
-          notes: true,
-          items: true,
-          attachments: true,
+    await prisma.order
+      .update({
+        where: { id: id, softDeleted: false },
+        data: {
+          softDeleted: true,
         },
       })
       .then(async (res) => {
