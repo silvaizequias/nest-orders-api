@@ -1,10 +1,10 @@
 import { PassportStrategy } from '@nestjs/passport'
 import { Injectable } from '@nestjs/common'
-import { AuthorizationService } from '../authorization.service'
 import { HeaderAPIKeyStrategy } from 'passport-headerapikey'
+import { AuthorizationService } from './authorization.service'
 
 @Injectable()
-export class LocalAuthorizationStrategy extends PassportStrategy(
+export class AuthorizationStrategy extends PassportStrategy(
   HeaderAPIKeyStrategy,
   'authorizationKey',
 ) {
@@ -12,10 +12,12 @@ export class LocalAuthorizationStrategy extends PassportStrategy(
     super(
       { header: 'authorizationKey', prefix: '' },
       true,
-      async (authorizationKey: string, done: any) => {
-        const authorized =
-          await this.authorizationService.validation(authorizationKey)
-        if (authorized && !authorized?.active) return done(null, false)
+      async (authorizationKey: string, done: any, request: Request) => {
+        const authorized = await this.authorizationService.validation(
+          authorizationKey,
+          request,
+        )
+        if (authorized) return done(null, false)
 
         return done(null, true)
       },

@@ -1,7 +1,7 @@
 import { HttpException, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 
-export const deleteNoteRepository = async (id: string) => {
+export const removeNote = async (id: string) => {
   const prisma = new PrismaService()
   try {
     return await prisma.note

@@ -1,30 +1,30 @@
 import { Injectable } from '@nestjs/common'
 import { CreateItemDto } from './dto/create-item.dto'
 import { UpdateItemDto } from './dto/update-item.dto'
-import { createItemRepository } from './repositories/create-item.repository'
-import { readItemRepository } from './repositories/read-item.repository'
-import { updateItemRepository } from './repositories/update-item.repository'
-import { deleteItemRepository } from './repositories/delete-item.repository'
+import { createItem } from './repositories/POST'
+import { findItemById, findItems } from './repositories/GET'
+import { updateItem } from './repositories/PATCH'
+import { removeItem } from './repositories/DELETE'
 
 @Injectable()
 export class ItemsService {
   create(createItemDto: CreateItemDto) {
-    return createItemRepository(createItemDto)
+    return createItem(createItemDto)
   }
 
   findAll() {
-    return readItemRepository()
+    return findItems()
   }
 
   findOne(id: string) {
-    return readItemRepository(id)
+    return findItemById(id)
   }
 
   update(id: string, updateItemDto: UpdateItemDto) {
-    return updateItemRepository(id, updateItemDto)
+    return updateItem(id, updateItemDto)
   }
 
   remove(id: string) {
-    return deleteItemRepository(id)
+    return removeItem(id)
   }
 }

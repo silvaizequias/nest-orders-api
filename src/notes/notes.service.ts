@@ -1,30 +1,30 @@
 import { Injectable } from '@nestjs/common'
 import { CreateNoteDto } from './dto/create-note.dto'
 import { UpdateNoteDto } from './dto/update-note.dto'
-import { createNoteRepository } from './repositories/create-note.repository'
-import { readNoteRepository } from './repositories/read-note.repository'
-import { updateNoteRepository } from './repositories/update-note.repository'
-import { deleteNoteRepository } from './repositories/delete-note.repository'
+import { createNote } from './repositories/POST'
+import { findNoteById, findNotes } from './repositories/GET'
+import { updateNote } from './repositories/PATCH'
+import { removeNote } from './repositories/DELETE'
 
 @Injectable()
 export class NotesService {
   create(createNoteDto: CreateNoteDto) {
-    return createNoteRepository(createNoteDto)
+    return createNote(createNoteDto)
   }
 
   findAll() {
-    return readNoteRepository()
+    return findNotes()
   }
 
   findOne(id: string) {
-    return readNoteRepository(id)
+    return findNoteById(id)
   }
 
   update(id: string, updateNoteDto: UpdateNoteDto) {
-    return updateNoteRepository(id, updateNoteDto)
+    return updateNote(id, updateNoteDto)
   }
 
   remove(id: string) {
-    return deleteNoteRepository(id)
+    return removeNote(id)
   }
 }

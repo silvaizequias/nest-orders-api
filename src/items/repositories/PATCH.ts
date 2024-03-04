@@ -3,10 +3,7 @@ import { HttpException, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { Prisma } from '@prisma/client'
 
-export const updateItemRepository = async (
-  id: string,
-  updateItemDto: UpdateItemDto,
-) => {
+export const updateItem = async (id: string, updateItemDto: UpdateItemDto) => {
   const prisma = new PrismaService()
   try {
     const { orderCode } = updateItemDto
@@ -26,7 +23,8 @@ export const updateItemRepository = async (
     const order = await prisma.order.findFirst({
       where: { code: orderCode, softDeleted: false },
     })
-    if (!order) throw new NotFoundException('ordem não encontrada')
+    if (!order)
+      throw new NotFoundException(`pedido ${orderCode} não encontrado`)
 
     const data: Prisma.ItemUpdateInput = {
       ...UpdateItemDto,
@@ -43,7 +41,7 @@ export const updateItemRepository = async (
       })
       .then(async (res) => {
         return JSON.stringify(
-          `o item ${res?.code} da ordem de serviço ${orderCode} foi atualizado`,
+          `o item ${res?.code} do pedido ${orderCode} foi atualizado`,
         )
       })
   } catch (error) {

@@ -4,8 +4,7 @@ import { ValidationPipe } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 async function bootstrap() {
-  const PORT = process.env.PORT
-
+  const PORT = process.env.PORT ?? ''
   const app = await NestFactory.create(AppModule)
   app.useGlobalPipes(
     new ValidationPipe({
@@ -20,8 +19,8 @@ async function bootstrap() {
   })
 
   const options = new DocumentBuilder()
-    .setTitle('management')
-    .setDescription('management')
+    .setTitle('orders')
+    .setDescription('orders')
     .setVersion('1.0')
     .addApiKey({
       type: 'apiKey',

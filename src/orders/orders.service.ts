@@ -1,50 +1,53 @@
 import { Injectable } from '@nestjs/common'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { UpdateOrderDto } from './dto/update-order.dto'
-import { createOrderRepository } from './repositories/create-order.repository'
-import { readOrderRepository } from './repositories/read-order.repository'
-import { updateOrderRepository } from './repositories/update-order.repository'
-import { deleteOrderRepository } from './repositories/delete-order.repository'
-import { readOrderByCodeRepository } from './repositories/read-order-by-code.repository'
-import { readOrderByOrganizationRepository } from './repositories/read-order-by-organization.repository'
-import { readOrderByMemberRepository } from './repositories/read-order-by-member.repository'
-import { readOrderByCustomerRepository } from './repositories/read-order-by-customer.repository'
+import { createOrder } from './repositories/POST'
+import {
+  findOrderByCode,
+  findOrderById,
+  findOrders,
+  findOrdersByCustomer,
+  findOrdersByMember,
+  findOrdersByOrganization,
+} from './repositories/GET'
+import { updateOrder } from './repositories/PATCH'
+import { removeOrder } from './repositories/DELETE'
 
 @Injectable()
 export class OrdersService {
   create(createOrderDto: CreateOrderDto) {
-    return createOrderRepository(createOrderDto)
+    return createOrder(createOrderDto)
   }
 
   findAll() {
-    return readOrderRepository()
+    return findOrders()
   }
 
   findByCode(code: string) {
-    return readOrderByCodeRepository(code)
+    return findOrderByCode(code)
   }
 
   findByCustomer(customer: string) {
-    return readOrderByCustomerRepository(customer)
+    return findOrdersByCustomer(customer)
   }
 
   findByMember(member: string) {
-    return readOrderByMemberRepository(member)
+    return findOrdersByMember(member)
   }
 
   findByOrganization(organization: string) {
-    return readOrderByOrganizationRepository(organization)
+    return findOrdersByOrganization(organization)
   }
 
   findOne(id: string) {
-    return readOrderRepository(id)
+    return findOrderById(id)
   }
 
   update(id: string, updateOrderDto: UpdateOrderDto) {
-    return updateOrderRepository(id, updateOrderDto)
+    return updateOrder(id, updateOrderDto)
   }
 
   remove(id: string) {
-    return deleteOrderRepository(id)
+    return removeOrder(id)
   }
 }

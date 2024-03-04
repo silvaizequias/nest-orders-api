@@ -4,23 +4,12 @@ import { HttpException, Injectable } from '@nestjs/common'
 export class AuthorizationService {
   constructor() {}
 
-  async validation(authorizationKey: string): Promise<any> {
-    const MANAGEMENT_API_URL = process.env.MANAGEMENT_API_URL!
-
+  async validation(authorizationKey: string, request: Request): Promise<any> {
+    const { method, url } = request
     try {
-      const data = await fetch(
-        `${MANAGEMENT_API_URL}/organization-keys/authorization-key/${authorizationKey}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      const response = data && (await data.json())
-
-      return response
-    } catch (error) {
+      console.log(method, url, authorizationKey)
+      return true
+    } catch (error: any) {
       throw new HttpException(error, error.status)
     }
   }

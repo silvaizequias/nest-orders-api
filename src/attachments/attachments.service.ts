@@ -1,30 +1,30 @@
 import { Injectable } from '@nestjs/common'
 import { CreateAttachmentDto } from './dto/create-attachment.dto'
 import { UpdateAttachmentDto } from './dto/update-attachment.dto'
-import { createAttachmentRespository } from './repositories/create-attachment.repository'
-import { readAttachmentRepository } from './repositories/read-attachment.repository'
-import { updateAttachmentRepository } from './repositories/update-attachment.repository'
-import { deleteAttachmentRepository } from './repositories/delete-attachment.repository'
+import { createAttachment } from './repositories/POST'
+import { findAttachmentById, findAttachments } from './repositories/GET'
+import { updateAttachment } from './repositories/PATCH'
+import { removeAttachment } from './repositories/DELETE'
 
 @Injectable()
 export class AttachmentsService {
   create(createAttachmentDto: CreateAttachmentDto) {
-    return createAttachmentRespository(createAttachmentDto)
+    return createAttachment(createAttachmentDto)
   }
 
   findAll() {
-    return readAttachmentRepository()
+    return findAttachments()
   }
 
   findOne(id: string) {
-    return readAttachmentRepository(id)
+    return findAttachmentById(id)
   }
 
   update(id: string, updateAttachmentDto: UpdateAttachmentDto) {
-    return updateAttachmentRepository(id, updateAttachmentDto)
+    return updateAttachment(id, updateAttachmentDto)
   }
 
   remove(id: string) {
-    return deleteAttachmentRepository(id)
+    return removeAttachment(id)
   }
 }

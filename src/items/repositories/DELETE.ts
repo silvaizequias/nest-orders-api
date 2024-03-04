@@ -1,7 +1,7 @@
 import { HttpException, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 
-export const deleteItemRepository = async (id: string) => {
+export const removeItem = async (id: string) => {
   const prisma = new PrismaService()
 
   try {
@@ -14,7 +14,7 @@ export const deleteItemRepository = async (id: string) => {
       })
       .then(async (res) => {
         if (!res) throw new NotFoundException('anexo não encontrado')
-        return JSON.stringify(`anexo ${res.code} removido`)
+        return JSON.stringify(`item ${res.code} removido`)
       })
   } catch (error) {
     await prisma.$disconnect()
