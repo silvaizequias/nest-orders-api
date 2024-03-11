@@ -1,11 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
+import { Decimal } from '@prisma/client/runtime/library'
 import { Type } from 'class-transformer'
 import {
   IsBoolean,
   IsDate,
+  IsDecimal,
   IsNumber,
   IsOptional,
-  IsPositive,
   IsString,
   Length,
 } from 'class-validator'
@@ -30,11 +31,10 @@ export class CreateOrderDto {
   @IsOptional()
   subject: string
 
-  @ApiPropertyOptional({ default: 0 })
-  @IsNumber({ maxDecimalPlaces: 2 })
-  @IsPositive()
+  @ApiPropertyOptional()
   @IsOptional()
-  price: number
+  @IsDecimal({ force_decimal: false, decimal_digits: '1,2' })
+  price: Decimal
 
   @ApiPropertyOptional()
   @IsString()

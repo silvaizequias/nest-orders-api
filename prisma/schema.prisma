@@ -69,7 +69,7 @@ model Order {
   code        String   @unique
   requirement String?
   subject     String?
-  price       Decimal? @default(0) @db.Decimal(5, 2)
+  price       Decimal? @default(0) @db.Decimal()
   observation String?  @db.Text
 
   organization String
@@ -86,19 +86,19 @@ model Order {
   destinationLatitude   Float?  @map("destination_latitude") @db.DoublePrecision
   destinationLongitude  Float?  @map("destination_longitude") @db.DoublePrecision
 
-  deadline DateTime? @db.Timestamp
+  deadline DateTime? @db.Timestamp()
 
   started   Boolean?  @default(false)
   startDate DateTime? @db.Date
-  startNote String?   @map("start_note") @db.Text
+  startNote String?   @map("start_note") @db.Text()
 
   completed      Boolean?  @default(false)
-  completionDate DateTime? @db.Timestamp
-  completionNote String?   @map("completion_note") @db.Text
+  completionDate DateTime? @db.Timestamp()
+  completionNote String?   @map("completion_note") @db.Text()
 
   canceled         Boolean?  @default(false)
-  cancellationDate DateTime? @db.Timestamp
-  cancellationNote String?   @map("cancellation_note") @db.Text
+  cancellationDate DateTime? @db.Timestamp()
+  cancellationNote String?   @map("cancellation_note") @db.Text()
 
   attachments Attachment[]
   items       Item[]

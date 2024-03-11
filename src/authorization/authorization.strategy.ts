@@ -17,7 +17,7 @@ export class AuthorizationStrategy extends PassportStrategy(
           authorizationKey,
           request,
         )
-        if (authorized) return done(null, false)
+        if (!authorized) return done(null, false)
 
         return done(null, true)
       },
