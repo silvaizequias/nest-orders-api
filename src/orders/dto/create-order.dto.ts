@@ -93,6 +93,16 @@ export class CreateOrderDto {
   destinationLongitude: number
 
   @ApiPropertyOptional()
+  @IsNumber()
+  @IsOptional()
+  latitude: number
+
+  @ApiPropertyOptional()
+  @IsNumber()
+  @IsOptional()
+  longitude: number
+
+  @ApiPropertyOptional()
   @IsOptional()
   @IsDate()
   @Type(() => Date)
