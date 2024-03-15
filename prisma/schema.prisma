@@ -86,6 +86,9 @@ model Order {
   destinationLatitude   Float?  @map("destination_latitude") @db.DoublePrecision
   destinationLongitude  Float?  @map("destination_longitude") @db.DoublePrecision
 
+  latitude  Float? @db.DoublePrecision
+  longitude Float? @db.DoublePrecision
+
   deadline DateTime? @db.Timestamp()
 
   started   Boolean?  @default(false)
