@@ -7,7 +7,7 @@ export const findAttachments = async () => {
   try {
     return await prisma.attachment.findMany({
       take: 100,
-      skip: 50,
+      //skip: 50,
       where: { softDeleted: false },
       include: {
         order: true,

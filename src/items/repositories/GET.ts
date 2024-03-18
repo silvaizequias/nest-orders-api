@@ -7,7 +7,7 @@ export const findItems = async () => {
   try {
     return await prisma.item.findMany({
       take: 100,
-      skip: 50,
+      //skip: 50,
       where: { softDeleted: false },
       include: {
         order: true,

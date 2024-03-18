@@ -6,7 +6,7 @@ export const findNotes = async () => {
   try {
     return await prisma.note.findMany({
       take: 100,
-      skip: 50,
+      //skip: 50,
       where: { softDeleted: false },
       include: {
         order: true,

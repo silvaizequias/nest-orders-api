@@ -7,7 +7,7 @@ export const findOrders = async () => {
   try {
     return await prisma.order.findMany({
       take: 100,
-      skip: 50,
+      //cursor: { id: '10' },
       where: { softDeleted: false },
       orderBy: { createdAt: 'desc' },
       include: {
@@ -80,7 +80,7 @@ export const findOrdersByCustomer = async (customer: string) => {
     return await prisma.order
       .findMany({
         take: 100,
-        skip: 50,
+        //skip: 50,
         where: { customer: customer, softDeleted: false },
         orderBy: { createdAt: 'desc' },
         include: {
@@ -108,7 +108,7 @@ export const findOrdersByMember = async (member: string) => {
     return await prisma.order
       .findMany({
         take: 100,
-        skip: 50,
+        //skip: 50,
         where: { member: member, softDeleted: false },
         orderBy: { createdAt: 'desc' },
         include: {
@@ -136,7 +136,7 @@ export const findOrdersByOrganization = async (organization: string) => {
     return await prisma.order
       .findMany({
         take: 100,
-        skip: 50,
+        //skip: 50,
         where: { organization: organization, softDeleted: false },
         orderBy: { createdAt: 'desc' },
         include: {
