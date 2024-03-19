@@ -71,10 +71,9 @@ export class CreateOrderDto {
   @IsOptional()
   originLongitude: number
 
-  @ApiPropertyOptional()
+  @ApiProperty()
   @IsString()
   @Length(8)
-  @IsOptional()
   destinationZipCode: string
 
   @ApiPropertyOptional()
