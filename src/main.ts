@@ -14,7 +14,14 @@ async function bootstrap() {
   )
 
   app.enableCors({
-    origin: ['http://localhost:3000', 'https://dedicado.digital'],
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:3010',
+      'http://localhost:3020',
+      'http://localhost:3030',
+      'http://localhost:3210',
+      'https://dedicado.digital',
+    ],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   })
 
