@@ -25,6 +25,7 @@ export class OrderEntity implements Order {
   destinationLongitude: number
   latitude: number
   longitude: number
+  directions: string
   deadline: Date
   started: boolean
   startDate: Date

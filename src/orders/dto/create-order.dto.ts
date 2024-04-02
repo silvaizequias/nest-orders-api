@@ -102,6 +102,11 @@ export class CreateOrderDto {
   longitude: number
 
   @ApiPropertyOptional()
+  @IsString()
+  @IsOptional()
+  directions: string
+
+  @ApiPropertyOptional()
   @IsOptional()
   @IsDate()
   @Type(() => Date)

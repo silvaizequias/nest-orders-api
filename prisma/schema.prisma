@@ -89,6 +89,8 @@ model Order {
   latitude  Float? @db.DoublePrecision
   longitude Float? @db.DoublePrecision
 
+  directions String?
+
   deadline DateTime? @db.Timestamp()
 
   started   Boolean?  @default(false)
