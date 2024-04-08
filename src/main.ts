@@ -14,14 +14,7 @@ async function bootstrap() {
   )
 
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:3010',
-      'http://localhost:3020',
-      'http://localhost:3030',
-      'http://localhost:3210',
-      'https://dedicado.digital',
-    ],
+    origin: ['http://localhost', 'https://dedicado.digital'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   })
 
@@ -39,6 +32,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options)
   SwaggerModule.setup('swagger', app, document)
 
-  await app.listen(PORT || 3000)
+  await app
+    .listen(PORT || 3000)
+    .then(() => console.log(`server running on http://localhost:${PORT}`))
 }
 bootstrap()
