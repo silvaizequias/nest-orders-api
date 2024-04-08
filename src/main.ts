@@ -18,7 +18,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new NewrelicInterceptor())
 
   app.enableCors({
-    origin: ['http://localhost', 'https://dedicado.digital'],
+    origin: ['*'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   })
 
