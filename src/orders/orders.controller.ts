@@ -14,14 +14,14 @@ import { OrdersService } from './orders.service'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { UpdateOrderDto } from './dto/update-order.dto'
 import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { AuthGuard } from '@nestjs/passport'
+import { AuthorizationApiKeyGuard } from 'src/authorization/authorization.guard'
 
 @ApiTags('orders')
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -30,7 +30,7 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -39,7 +39,7 @@ export class OrdersController {
     return this.ordersService.findAll()
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -48,7 +48,7 @@ export class OrdersController {
     return this.ordersService.findByCode(code)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -57,7 +57,7 @@ export class OrdersController {
     return this.ordersService.findByCustomer(customer)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -66,7 +66,7 @@ export class OrdersController {
     return this.ordersService.findByMember(member)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -75,7 +75,7 @@ export class OrdersController {
     return this.ordersService.findByOrganization(organization)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -84,7 +84,7 @@ export class OrdersController {
     return this.ordersService.findOne(id)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -93,7 +93,7 @@ export class OrdersController {
     return this.ordersService.update(id, updateOrderDto)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)

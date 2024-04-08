@@ -14,14 +14,14 @@ import { ItemsService } from './items.service'
 import { CreateItemDto } from './dto/create-item.dto'
 import { UpdateItemDto } from './dto/update-item.dto'
 import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { AuthGuard } from '@nestjs/passport'
+import { AuthorizationApiKeyGuard } from 'src/authorization/authorization.guard'
 
 @ApiTags('items')
 @Controller('items')
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -30,7 +30,7 @@ export class ItemsController {
     return this.itemsService.create(createItemDto)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -39,7 +39,7 @@ export class ItemsController {
     return this.itemsService.findAll()
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -48,7 +48,7 @@ export class ItemsController {
     return this.itemsService.findOne(id)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -57,7 +57,7 @@ export class ItemsController {
     return this.itemsService.update(id, updateItemDto)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)

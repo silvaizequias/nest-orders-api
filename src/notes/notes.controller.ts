@@ -14,14 +14,14 @@ import { NotesService } from './notes.service'
 import { CreateNoteDto } from './dto/create-note.dto'
 import { UpdateNoteDto } from './dto/update-note.dto'
 import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { AuthGuard } from '@nestjs/passport'
+import { AuthorizationApiKeyGuard } from 'src/authorization/authorization.guard'
 
 @ApiTags('notes')
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -30,7 +30,7 @@ export class NotesController {
     return this.notesService.create(createNoteDto)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -39,7 +39,7 @@ export class NotesController {
     return this.notesService.findAll()
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -48,7 +48,7 @@ export class NotesController {
     return this.notesService.findOne(id)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -57,7 +57,7 @@ export class NotesController {
     return this.notesService.update(id, updateNoteDto)
   }
 
-  @UseGuards(AuthGuard('authorizationKey'))
+  @UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)

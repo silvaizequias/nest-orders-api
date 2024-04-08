@@ -29,7 +29,7 @@ async function bootstrap() {
     .addApiKey({
       type: 'apiKey',
       in: 'header',
-      description: 'authorizationKey',
+      description: 'Authorization',
     })
     .build()
 

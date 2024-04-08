@@ -6,15 +6,15 @@ import { AuthorizationService } from './authorization.service'
 @Injectable()
 export class AuthorizationStrategy extends PassportStrategy(
   HeaderAPIKeyStrategy,
-  'authorizationKey',
+  'Authorization',
 ) {
   constructor(private authorizationService: AuthorizationService) {
     super(
-      { header: 'authorizationKey', prefix: '' },
+      { header: 'Authorization', prefix: '' },
       true,
-      async (authorizationKey: string, done: any, request: Request) => {
+      async (Authorization: string, done: any, request: Request) => {
         const authorized = await this.authorizationService.validation(
-          authorizationKey,
+          Authorization,
           request,
         )
         if (!authorized) return done(null, false)
