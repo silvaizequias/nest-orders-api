@@ -5,7 +5,7 @@ export const orderSmsTemplateCreated = ({
   organization,
   requirement,
 }: OrderMessageTemplateType) => {
-  return `um pedido de ${requirement.toLowerCase()} foi criado por ${organization.toLowerCase()}. veja mais detalhes em https://pedidos.dedicado.digital/${order}`
+  return `um pedido de ${requirement.toLowerCase()} foi criado por ${organization.toLowerCase()}. veja mais detalhes em https://pedido.dedicado.digital/${order}`
 }
 
 export const orderEmailTemplateCreated = ({
@@ -15,7 +15,7 @@ export const orderEmailTemplateCreated = ({
 }: OrderMessageTemplateType) => {
   return `<div>
   <p>um pedido de ${requirement.toLowerCase()} foi criado por ${organization.toLowerCase()}</p>
-  <p>você poderá acompanhar mais detalhes através do link https://pedidos.dedicado.digital/${order}</p>
+  <p>você poderá acompanhar mais detalhes através do link https://pedido.dedicado.digital/${order}</p>
   </div>`
 }
 
@@ -24,7 +24,7 @@ export const orderStatedSmsTemplate = ({
   organization,
   member,
 }: OrderMessageTemplateType) => {
-  return `o seu pedido na organização ${organization.toLowerCase()} foi iniciado por ${member.toLowerCase()}. acompanhe através do link https://pedidos.dedicado.digital/${order}`
+  return `o seu pedido na organização ${organization.toLowerCase()} foi iniciado por ${member.toLowerCase()}. acompanhe através do link https://pedido.dedicado.digital/${order}`
 }
 
 export const orderStatedEmailTemplate = ({
@@ -35,7 +35,7 @@ export const orderStatedEmailTemplate = ({
 }: OrderMessageTemplateType) => {
   return `<div>
   <p>${member.toLowerCase()} iniciou o pedido de ${requirement.toLowerCase()} na organização ${organization.toLowerCase()}.</p>
-  <p>você poderá acompanhar mais detalhes através do link https://pedidos.dedicado.digital/${order}</p>
+  <p>você poderá acompanhar mais detalhes através do link https://pedido.dedicado.digital/${order}</p>
   </div>`
 }
 
@@ -45,7 +45,7 @@ export const orderCompletedSmsTemplate = ({
   member,
   requirement,
 }: OrderMessageTemplateType) => {
-  return `${member.toLowerCase()} concluiu o pedido de ${requirement.toLowerCase()} na organização ${organization.toLowerCase()}. mais detalhes através do link https://pedidos.dedicado.digital/${order}`
+  return `${member.toLowerCase()} concluiu o pedido de ${requirement.toLowerCase()} na organização ${organization.toLowerCase()}. mais detalhes através do link https://pedido.dedicado.digital/${order}`
 }
 
 export const orderCompletedEmailTemplate = ({
@@ -56,6 +56,6 @@ export const orderCompletedEmailTemplate = ({
 }: OrderMessageTemplateType) => {
   return `<div>
   <p>${member.toLowerCase()} concluiu o pedido de ${requirement.toLowerCase()} na organização ${organization.toLowerCase()}.</p>
-  <p>você poderá acompanhar mais detalhes através do link https://pedidos.dedicado.digital/${order}</p>
+  <p>você poderá acompanhar mais detalhes através do link https://pedido.dedicado.digital/${order}</p>
   </div>`
 }

@@ -39,7 +39,7 @@ export class OrdersController {
     return this.ordersService.findAll()
   }
 
-  @UseGuards(AuthorizationApiKeyGuard)
+  //@UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
