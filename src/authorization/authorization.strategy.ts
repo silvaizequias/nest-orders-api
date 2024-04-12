@@ -11,13 +11,12 @@ export class AuthorizationStrategy extends PassportStrategy(
   constructor(private authorizationService: AuthorizationService) {
     super(
       { header: 'Authorization', prefix: '' },
-      true,
-      async (Authorization: string, done: any, request: Request) => {
-        const authorized = await this.authorizationService.validation(
-          Authorization,
-          request,
-        )
-        if (!authorized) return done(null, false)
+      false,
+      async (Authorization: string, done: any) => {
+        const authorized =
+          await this.authorizationService.validation(Authorization)
+
+        if (!authorized) done(null, false)
 
         return done(null, true)
       },

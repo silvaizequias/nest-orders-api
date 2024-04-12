@@ -1,24 +1,23 @@
-import { HttpException, Injectable } from '@nestjs/common'
-import { AuthorizationDto } from './authorization.dto'
+import { Injectable } from '@nestjs/common'
+import { spendSubscription } from 'src/utils/handle-management-api'
 
 @Injectable()
 export class AuthorizationService {
   constructor() {}
 
-  async validation(Authorization: string, request: Request): Promise<any> {
-    const { method, url, headers } = request
-    const { host }: any = headers
-    const authorizationDto: AuthorizationDto = {
-      key: Authorization,
-      host: host,
-      method: method,
-      url: url,
-    }
-    try {
-      console.log(authorizationDto)
-      return true
-    } catch (error: any) {
-      throw new HttpException(error, error.status)
-    }
+  async validation(Authorization: string): Promise<any> {
+    return await spendSubscription({
+      authorizationKey: Authorization,
+      spend: 1,
+    })
+      .then(async (data) => {
+        const authorized = await data
+        if (!authorized?.response) {
+          return true
+        } else {
+          return false
+        }
+      })
+      .catch((error) => console.log(error))
   }
 }

@@ -56,3 +56,8 @@ export type UserType = {
   longitude: number
   organizations: MemberType[]
 }
+
+export type SpendSubscriptionType = {
+  authorizationKey: string
+  spend: number
+}
