@@ -48,7 +48,7 @@ export class OrdersController {
     return this.ordersService.findByCode(code)
   }
 
-  @UseGuards(AuthorizationApiKeyGuard)
+  //@UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -57,7 +57,7 @@ export class OrdersController {
     return this.ordersService.findByCustomer(customer)
   }
 
-  @UseGuards(AuthorizationApiKeyGuard)
+  //@UseGuards(AuthorizationApiKeyGuard)
   @ApiOkResponse()
   @ApiNotFoundResponse()
   @UseInterceptors(ClassSerializerInterceptor)
